@@ -6,6 +6,17 @@ SELECT o.user_id AS user_id
 FROM orders o
 JOIN brands b ON b.brand_id = o.brand_id
 WHERE o.order_id = 3 AND   o.date < '2022-09-21' OR  holding_company_name = 'ATG'
+
+--or
+WITH CTE AS (SELECT user_id, RANK() OVER(ORDER BY date) AS rank
+FROM brands b
+JOIN orders o
+ON b.brand_id = o.brand_id
+WHERE date >= '9/21/22'
+)
+SELECT user_id
+FROM CTE 
+WHERE rank=3;
 --______________________________________________________________________________________________________________________________________________________________________
 
 --Question2
