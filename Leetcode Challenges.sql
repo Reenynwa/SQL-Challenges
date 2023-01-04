@@ -20,7 +20,10 @@ GROUP BY user_id;
 --Write an SQL query that will, for each user, return the number of followers.
 --Return the result table ordered by user_id in asc.
 
-SELECT user_id , count(follower_id) AS Followers_countFROM FollowersGROUP BY user_id   ORDER BY user_id ASC;
+SELECT user_id , count(follower_id) AS Followers_count
+FROM Followers
+GROUP BY user_id   
+ORDER BY user_id ASC;
 --_____________________________________________________________________________________________________________________________________________________________________
 
 --Question3
@@ -29,4 +32,20 @@ SELECT user_id , count(follower_id) AS Followers_countFROM FollowersGROUP BY u
 SELECT user_id,
     CONCAT(UPPER(SUBSTRING(name, 1, 1)), LOWER(SUBSTRING(name, 2, length(name)))) AS name
 FROM users;
+
+--_____________________________________________________________________________________________________________________________________________________________________
+
+--Question 4
+--Write an SQL query to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+--Return the result table sorted in any order.
+--From <https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/> 
+
+
+SELECT customer_id,
+ COUNT(visit_id) AS count_no_trans
+FROM visits
+WHERE visit_id NOT IN (SELECT visit_id FROM transactions)
+GROUP BY customer_id
+ORDER BY count_no_trans;
+
 
