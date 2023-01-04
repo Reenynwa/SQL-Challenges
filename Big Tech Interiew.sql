@@ -37,4 +37,4 @@ FROM orders o
 JOIN brands b ON o.brand_id = b.brand_id
 WHERE  date BETWEEN '2020-03-13' AND  '2020-06-27' 
 AND holding_company_name = 'Beam Suntory'
-GROUP BY  date_sales,brand_name
+GROUP BY  date_sales,brand_name;
