@@ -15,7 +15,7 @@ ORDER BY  page_id ASC ;
 
 --Question 2
 --New York Times Questions:
---Assume that you are given the table below containing information on viewership by device type (where the three types are laptop, tablet, and phone). Define ìmobileî as the sum of tablet and phone viewership numbers. Write a query to compare the viewership on laptops versus mobile devices. Output the total viewership for laptop and mobile devices in the format of "laptop views" and "mobile_views" 
+--Assume that you are given the table below containing information on viewership by device type (where the three types are laptop, tablet, and phone). Define ‚Äúmobile‚Äù as the sum of tablet and phone viewership numbers. Write a query to compare the viewership on laptops versus mobile devices. Output the total viewership for laptop and mobile devices in the format of "laptop views" and "mobile_views" 
 
 SELECT 
     SUM(CASE WHEN device_type = 'laptop' THEN 1 ELSE 0  END) AS laptop_views,
@@ -96,4 +96,21 @@ LIMIT 3;
 SELECT DISTINCT part  
 FROM parts_assembly
 WHERE finish_date is NULL;
+
+--__________________________________________________________________________________________________________________________________________________________________________
+
+--Question 7
+--A Microsoft Azure Supercloud customer is a company which buys at least 1 product from each product category.
+--Write a query to report the company ID which is a Supercloud customer.
+--(From <https://datalemur.com/questions/supercloud-customer>) 
+
+SELECT  c.Customer_id
+FROM customer contracts c
+JOIN products p USING (Product_id)
+GROUP BY 1
+HAVING COUNT( DISTINCT p.product_category)  = 3
+
+
+
+
 
