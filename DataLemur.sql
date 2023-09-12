@@ -54,7 +54,6 @@ LIMIT 2;
 
 --__________________________________________________________________________________________________________________________________________________________________________________________
 
-
 --Question 4 
 --Walmart
 --Assume you are given the following tables on Walmart transactions and products. 
@@ -100,7 +99,7 @@ WHERE finish_date is NULL;
 --__________________________________________________________________________________________________________________________________________________________________________
 
 --Question 7
---A Microsoft Azure Supercloud customer is a company which buys at least 1 product from each product category.
+--A Microsoft Azure Supercloud customer is a company that buys at least 1 product from each product category.
 --Write a query to report the company ID which is a Supercloud customer.
 --(From <https://datalemur.com/questions/supercloud-customer>) 
 
@@ -109,6 +108,20 @@ FROM customer contracts c
 JOIN products p USING (Product_id)
 GROUP BY 1
 HAVING COUNT( DISTINCT p.product_category)  = 3
+
+--__________________________________________________________________________________________________________________________________________________________________________
+
+--Question8
+--New TikTok users sign up with their emails and each user receives a text confirmation to activate their account. Assume you are given the below tables about emails and texts.
+--Write a query to display the ids of the users who did not confirm on the first day of sign-up, but confirmed on the second day.
+--From <https://datalemur.com/questions/second-day-confirmation> 
+
+SELECT e.user_id
+FROM  emails e
+JOIN texts t  
+USING  (email_id)
+WHERE signup_action = 'Confirmed' AND 
+t.action_date = e.signup_date + interval '1 day'
 
 
 
